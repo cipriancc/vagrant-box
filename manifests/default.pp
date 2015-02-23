@@ -130,11 +130,41 @@ class workspace{
 
 }
 
+class nodejs {
+	 
+  package { "nodejs":
+    ensure => present,
+  }
+  package { "node":
+    ensure => present,
+  }
+  
+  package { "git":
+    ensure => present,
+  }
+  package { "subversion":
+    ensure => present,
+  }
+   package { "npm":
+    ensure => present,
+  }
+  
+	exec { "install_wathever":
+		command => '/usr/bin/npm install -g grunt grunt-cli',
+		require => [
+			Package["npm"]
+        ]
+	}
+ 
+
+}
+
  
 include base
-include http
-include php
-include mysql
-include phpmyadmin
-include workspace
+include nodejs
+#include http
+#include php
+#include mysql
+#include phpmyadmin
+#include workspace
 
